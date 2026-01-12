@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tambah Transaksi - FlowFinance</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+</head>
+<body>
+    <main class="container">
+        <h2>Tambah Transaksi Baru</h2>
+        <form action="/add" method="POST">
+            <label for="amount">Jumlah (Rp)</label>
+            <input type="number" name="amount" required>
+
+            <label for="description">Deskripsi</label>
+            <input type="text" name="description" required>
+
+            <label for="type">Tipe Transaksi</label>
+            <select name="type" required>
+                <option value="Expense">Pengeluaran (Expense)</option>
+                <option value="Income">Pemasukan (Income)</option>
+            </select>
+
+            <label for="category_id">Kategori</label>
+            <select name="category_id" required>
+                <% categories.forEach(cat => { %>
+                    <option value="<%= cat.id %>"><%= cat.category_name %></option>
+                <% }) %>
+            </select>
+
+            <button type="submit">Simpan</button>
+            <a href="/" role="button" class="secondary">Batal</a>
+        </form>
+    </main>
+</body>
+</html>

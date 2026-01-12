@@ -1,11 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Tekser</title>
-  </head>
-  <body>
-    <h1>Hello World! Silakan edit file ini.</h1>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowFinance C6</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+</head>
+<body>
+    <main class="container">
+        <nav>
+            <ul>
+                <li><strong>FlowFinance (Kelompok C6)</strong></li>
+            </ul>
+            <ul>
+                <li><a href="/add" role="button">Tambah Transaksi</a></li>
+            </ul>
+        </nav>
+
+        <section>
+            <h2>Daftar Transaksi</h2>
+            <figure>
+                <table role="grid">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tanggal</th>
+                            <th scope="col">Kategori</th>
+                            <th scope="col">Deskripsi</th>
+                            <th scope="col">Tipe</th>
+                            <th scope="col">Jumlah (Rp)</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% transactions.forEach(item => { %>
+                        <tr>
+                            <td><%= new Date(item.created_at).toLocaleDateString('id-ID') %></td>
+                            <td><%= item.category_name || 'Tanpa Kategori' %></td>
+                            <td><%= item.description %></td>
+                            <td>
+                                <% if(item.type == 'Income') { %>
+                                    <span style="color: green;">Pemasukan</span>
+                                <% } else { %>
+                                    <span style="color: red;">Pengeluaran</span>
+                                <% } %>
+                            </td>
+                            <td>Rp <%= Number(item.amount).toLocaleString('id-ID') %></td>
+                            <td>
+                                <a href="/edit/<%= item.id %>">Edit</a> | 
+                                <a href="/delete/<%= item.id %>" onclick="return confirm('Yakin hapus?')" style="color: red;">Hapus</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </figure>
+        </section>
+        
+        <%- include('partials/footer'); %>
+    </main>
+</body>
 </html>
