@@ -23,13 +23,13 @@
             <label for="category_id">Kategori</label>
             <select name="category_id" required>
                 <% categories.forEach(cat => { %>
-                    <option value="<%= cat.id %>" <%= cat.id === transaction.category_id ? 'selected' : '' %>>
+                    <option value="<%= cat.id %>" <%= transaction.category_id === cat.id ? 'selected' : '' %>>
                         <%= cat.category_name %>
                     </option>
                 <% }) %>
             </select>
 
-            <button type="submit">Update</button>
+            <button type="submit">Update Transaksi</button>
             <a href="/" role="button" class="secondary">Batal</a>
         </form>
     </main>

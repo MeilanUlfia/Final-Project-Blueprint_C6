@@ -1,10 +1,18 @@
-FROM node:18
+# Menggunakan base image node versi 18 alpine
+FROM node:18-alpine
 
-WORKDIR /app
-COPY app/package*.json ./
+# Tentukan working directory
+WORKDIR /usr/src/app
+
+# Copy package.json dan install dependencies
+COPY package*.json ./
 RUN npm install
 
-COPY app/ .
+# Copy semua file aplikasi
+COPY . .
+
+# Expose port internal aplikasi (3000)
 EXPOSE 3000
 
-CMD ["node", "app.js"]
+# Jalankan aplikasi
+CMD ["npm", "start
